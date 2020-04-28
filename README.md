@@ -1,8 +1,12 @@
-[![Build Status](https://travis-ci.org/kigster/cmake-project-template.svg?branch=master)](https://travis-ci.org/kigster/cmake-project-template)
-
 # CMake C++ Project Template
 
-### Division with a remainder library
+## Using Ninja
+
+I used `ninja` instede of `make` because of fast performance. 
+
+This is a C++ Project Template for me, I use it for all my C++ Projects.
+
+## Division with a remainder library
 
 Thank you for your interest in this project!
 
@@ -17,7 +21,6 @@ Divider is a minimal project that's kept deliberately very small. When you build
  1. A tiny **static library** `lib/libdivision.a`,
  2. **A command line binary `bin/divider`**, which links with the library,
  3. **An executable unit test** `bin/divider_tests`  using [Google Test library](https://github.com/google/googletest).
- 4. **An optional BASH build script** `build-and-run` that you can use to quickly test if the project compiles, and runs.
 
 ## Usage
 
@@ -26,9 +29,8 @@ Divider is a minimal project that's kept deliberately very small. When you build
 You will need:
 
  * A modern C/C++ compiler
- * CMake 3.1+ installed (on a Mac, run `brew install cmake`)
- * If you prefer to code in a great IDE, I highly recommend [Jetbrains CLion](https://www.jetbrains.com/clion/). It is fully compatible with this project.
-
+ * CMake & Ninja installed (on a Arch Linux, run `pacman -S cmake ninja`)
+ 
 ### Building The Project
 
 #### Git Clone
@@ -39,21 +41,16 @@ First we need to check out the git repo:
 ❯ mkdir ~/workspace
 ❯ cd ~/workspace
 ❯ git clone \
-    https://github.com/kigster/cmake-project-template \
+    https://github.com/SakibFarhad/cmake-project-template \
     my-project
 ❯ cd my-project
-❯ bash build-and-run
 ```
-
-The output of this script is rather long and is shown [on this screenshot](doc/build-and-run.png).
-
-The script `build-and-run` is a short-cut — you shouldn't really be using this script to build your project, but see how to do it properly below.
 
 #### Project Structure
 
-There are three empty folders: `lib`, `bin`, and `include`. Those are populated by `make install`.
+`lib`, `bin` directory will be created automatically. Those are populated by `ninja install`.
 
-The rest should be obvious: `src` is the sources, and `test` is where we put our unit tests.
+The rest should be obvious: `src` is the sources, `include` for headers and `test` is where we put our unit tests.
 
 Now we can build this project, and below we show three separate ways to do so.
 
@@ -63,8 +60,8 @@ Now we can build this project, and below we show three separate ways to do so.
 ❯ rm -rf build && mkdir build
 ❯ git submodule init && git submodule update
 ❯ cd build
-❯ cmake ..
-❯ make && make install
+❯ cmake -G Ninja ..
+❯ ninja && ninja install
 ❯ cd ..
 ```
 
@@ -98,12 +95,12 @@ Now we can build this project, and below we show three separate ways to do so.
 Without arguments, it prints out its usage:
 
 ```bash
-❯ bin/divider
+❯ bin/simple_divider
 
-Divider © 2018 Monkey Claps Inc.
+Divider © 2020 Brick Inc.
 
 Usage:
-	divider <numerator> <denominator>
+	simple_divider <numerator> <denominator>
 
 Description:
 	Computes the result of a fractional division,
@@ -113,27 +110,13 @@ Description:
 But with arguments, it computes as expected the denominator:
 
 ```bash
-❯ bin/divider 112443477 12309324
+❯ bin/simple_divider 112443477 12309324
 
-Divider © 2018 Monkey Claps Inc.
+Divider © 2020 Brick Inc.
 
 Division : 112443477 / 12309324 = 9
 Remainder: 112443477 % 12309324 = 1659561
 ```
-
-### Building in CLion
-
-> **NOTE**: Since JetBrains software [does not officially support git submodules](https://youtrack.jetbrains.com/issue/IDEA-64024), you must run `git submodule init && git submodule update` before starting CLion on a freshly checked-out repo.
-
-> **NOTE**: We recommend that you copy file `.idea/workspace.xml.example` into `.idea/workspace.xml` **before starting CLion**. It will provide a good starting point for your project's workspace.
-
-Assuming you've done the above two steps, you can start CLion, and open the project's top level folder. CLion should automatically detect the top level `CMakeLists.txt` file and provide you with the full set of build targets.
-
-Select menu option **Build   ➜ Build Project**, and then **Build ➜ Install**.
-
-![CLION](doc/cmake-clion.png)
-
-The above screenshot is an example of CLion with this project open.
 
 ### Using it as a C++ Library
 
@@ -155,9 +138,10 @@ std::cout << "Remainder of the division is " << r.remainder;
 ## File Locations
 
  * `src/*` — C++ code that ultimately compiles into a library
+ * `include/*` — C++ header files
  * `test/lib` — C++ libraries used for tests (eg, Google Test)
  * `test/src` — C++ test suite
- * `bin/`, `lib`, `include` are all empty directories, until the `make install` install the project artifacts there.
+ * `bin/`, `lib` are all empty directories, until the `ninja install` install the project artifacts there.
 
 Tests:
 
@@ -170,13 +154,13 @@ Tests:
 
 **Pull Requests are WELCOME!** Please submit any fixes or improvements, and I promise to review it as soon as I can at the project URL:
 
- * [Project Github Home](https://github.com/kigster/cmake-project-template)
- * [Submit Issues](https://github.com/kigster/cmake-project-template/issues)
- * [Pull Requests](https://github.com/kigster/cmake-project-template/pulls)
+ * [Project Github Home](https://github.com/SakibFarhad/cmake-project-template)
+ * [Submit Issues](https://github.com/SakibFarhad/cmake-project-template/issues)
+ * [Pull Requests](https://github.com/SakibFarhad/cmake-project-template/pulls)
 
 ### License
 
-&copy; 2017-2019 Konstantin Gredeskoul.
+&copy; 2017-2020 Md. Sakib Ibne Farhad.
 
 Open sourced under MIT license, the terms of which can be read here — [MIT License](http://opensource.org/licenses/MIT).
 

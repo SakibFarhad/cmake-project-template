@@ -18,6 +18,6 @@ include_directories(${DIVISIBLE_INCLUDE_DIR})
 include_directories(${DIVISION_HEADERS_DIR})
 
 add_subdirectory(src)
-#add_subdirectory(test)
+add_subdirectory(test)
 
 

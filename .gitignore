@@ -40,16 +40,11 @@
 **/CMakeScripts
 **/compile_commands.json
 
-include/divisible/*
-
-
 ## Local 
-
+include/gmock
+include/gtest
 .idea/*.xml
-
 build/**/*
-
-include/*
 lib/*
 bin/*
 test/test_runner
